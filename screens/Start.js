@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   Button,
   TouchableWithoutFeedback,
   Keyboard,
@@ -12,6 +11,8 @@ import {
 import Card from "../components/Card";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
+import BodyText from "../components/BodyText";
+import TitleText from "../components/TitleText";
 
 import Colors from "../constants/colors";
 
@@ -34,6 +35,7 @@ const Start = props => {
       { text: "Yes", style: "destructive", onPress: submitConfirm },
       { text: "No", style: "destructive", onPress: handleReset }
     ]);
+    Keyboard.dismiss();
   };
 
   const submitConfirm = () => {
@@ -47,6 +49,7 @@ const Start = props => {
     setConfirm(true);
     setSelected(chosenNumber);
     setNumber("");
+    Keyboard.dismiss();
   };
 
   let confirmOutput;
@@ -57,7 +60,12 @@ const Start = props => {
         <Card style={styles.confirmedNumber}>
           <NumberContainer>{selected}</NumberContainer>
         </Card>
-        <Button style={styles.startGameButton} title='Start Game' />
+        <Button
+          style={styles.startGameButton}
+          title='Start Game'
+          onPress={() => props.onStart(selected)}
+          color='white'
+        />
       </View>
     );
   }
@@ -69,9 +77,9 @@ const Start = props => {
       }}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text style={styles.subtitle}>Enter a New Number</Text>
+          <BodyText style={styles.subtitle}>Enter a New Number</BodyText>
           <Input
             blurOnSubmit
             autoCapitalize='none'
@@ -109,16 +117,17 @@ const styles = new StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: Colors.bg
   },
   title: {
     fontSize: 20,
-    fontWeight: "700",
-    marginVertical: 10
+    marginVertical: 10,
+    color: "white"
   },
   subtitle: {
     marginVertical: 20,
-    fontWeight: "500"
+    fontSize: 18
   },
   inputContainer: {
     width: 300,
