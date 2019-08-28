@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <Header title='Guess My Number v1.0.0' />
+      <Header title='Guess My Number v1.1.0' />
       {content}
     </View>
   );

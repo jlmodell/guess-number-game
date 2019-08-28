@@ -13,6 +13,7 @@ import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText";
+import PrimaryButton from "../components/PrimaryButton";
 
 import Colors from "../constants/colors";
 
@@ -59,13 +60,12 @@ const Start = props => {
       <View>
         <Card style={styles.confirmedNumber}>
           <NumberContainer>{selected}</NumberContainer>
+          <View style={styles.startGameButton}>
+            <PrimaryButton onPress={() => props.onStart(selected)}>
+              Start Game
+            </PrimaryButton>
+          </View>
         </Card>
-        <Button
-          style={styles.startGameButton}
-          title='Start Game'
-          onPress={() => props.onStart(selected)}
-          color='white'
-        />
       </View>
     );
   }
@@ -91,20 +91,18 @@ const Start = props => {
             onChangeText={handleChange}
           />
           <View style={styles.buttonContainer}>
-            <View style={styles.buttons}>
-              <Button
-                title='Submit'
-                color={Colors.primary}
-                onPress={handleConfirm}
-              />
-            </View>
-            <View style={styles.buttons}>
-              <Button
-                onPress={handleReset}
-                title='Reset'
-                color={Colors.secondary}
-              />
-            </View>
+            <PrimaryButton
+              style={{ backgroundColor: Colors.primary }}
+              onPress={handleConfirm}
+            >
+              Submit
+            </PrimaryButton>
+            <PrimaryButton
+              onPress={handleReset}
+              style={{ backgroundColor: Colors.secondary }}
+            >
+              Reset
+            </PrimaryButton>
           </View>
         </Card>
         {confirmOutput}
@@ -116,7 +114,6 @@ const Start = props => {
 const styles = new StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 10,
     alignItems: "center",
     backgroundColor: Colors.bg
   },
@@ -154,7 +151,7 @@ const styles = new StyleSheet.create({
     alignItems: "center"
   },
   startGameButton: {
-    marginTop: 25,
+    marginTop: 20,
     width: "80%"
   }
 });
